@@ -99,6 +99,11 @@
             color: var(--primary);
         }
 
+        /* 汉堡菜单按钮 */
+        .hamburger {
+            display: none;
+        }
+
         /* Hero 区域 */
         #hero {
             min-height: 100vh;
@@ -506,18 +511,68 @@
                 display: none;
             }
 
+            /* 汉堡菜单 */
+            .hamburger {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                cursor: pointer;
+                padding: 5px;
+                z-index: 1001;
+            }
+
+            .hamburger span {
+                width: 25px;
+                height: 3px;
+                background: var(--primary);
+                border-radius: 2px;
+                transition: all 0.3s;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .nav-links.active {
+                display: flex;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: var(--bg-dark);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+                z-index: 999;
+            }
+
+            .nav-links.active a {
+                font-size: 1.5rem;
+            }
+
             #about {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
 
             .avatar-ring {
-                width: 200px;
-                height: 200px;
+                width: 180px;
+                height: 180px;
+                margin: 0 auto;
             }
 
             .avatar-inner {
-                font-size: 4rem;
+                font-size: 3.5rem;
             }
 
             .status-grid {
@@ -533,6 +588,115 @@
             .contact-links {
                 flex-direction: column;
                 align-items: center;
+            }
+
+            /* Hero 移动端优化 */
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .tagline {
+                font-size: 0.85rem;
+                letter-spacing: 2px;
+            }
+
+            /* 项目卡片移动端 */
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card {
+                padding: 20px;
+            }
+
+            /* 技能卡片移动端 */
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 40px;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            /* 页脚移动端 */
+            footer {
+                padding: 30px 15px;
+            }
+
+            footer p {
+                font-size: 0.9rem;
+            }
+
+            /* 滚动条隐藏 */
+            ::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        /* 小屏幕手机优化 */
+        @media (max-width: 400px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+
+            .avatar-ring {
+                width: 150px;
+                height: 150px;
+            }
+
+            .avatar-inner {
+                font-size: 3rem;
+            }
+
+            .project-icon {
+                font-size: 2rem;
+            }
+
+            .status-number {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* 触摸优化 */
+        @media (hover: none) and (pointer: coarse) {
+            /* 移除悬停效果，改为触摸反馈 */
+            .project-card:active,
+            .skill-card:active,
+            .contact-link:active {
+                transform: scale(0.98);
+                opacity: 0.9;
+            }
+
+            /* 滚动更流畅 */
+            html {
+                scroll-behavior: auto;
+            }
+
+            /* 禁用鼠标跟随效果 */
+            .cursor-glow {
+                display: none;
+            }
+
+            /* 减小按钮点击区域 */
+            .btn {
+                min-height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
         }
 
@@ -563,6 +727,11 @@
             <li><a href="#skills">技能</a></li>
             <li><a href="#contact">联系</a></li>
         </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </nav>
 
     <section id="hero">
@@ -802,6 +971,23 @@
             requestAnimationFrame(animate);
         }
         animate();
+
+        // 汉堡菜单
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // 点击导航链接后关闭菜单
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
 
         // 窗口大小改变时重新初始化
         window.addEventListener('resize', () => {
