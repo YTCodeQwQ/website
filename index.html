@@ -327,6 +327,76 @@
             font-size: 0.85rem;
         }
 
+        /* 项目展示 */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+        }
+
+        .project-link {
+            font-size: 1.5rem;
+            color: var(--text-dim);
+            transition: color 0.3s;
+        }
+
+        .project-link:hover {
+            color: var(--primary);
+        }
+
+        .project-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .project-card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .project-tag {
+            background: rgba(0, 245, 212, 0.1);
+            color: var(--primary);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
         /* 状态区 */
         #status-section {
             background: var(--bg-card);
@@ -488,6 +558,7 @@
     <nav>
         <div class="logo">&lt;YuTian /&gt;</div>
         <ul class="nav-links">
+            <li><a href="#projects">项目</a></li>
             <li><a href="#about">关于</a></li>
             <li><a href="#skills">技能</a></li>
             <li><a href="#contact">联系</a></li>
@@ -578,11 +649,21 @@
         </div>
     </section>
 
+    <section id="projects">
+        <h2 class="section-title">项目<span>作品</span></h2>
+        <div class="projects-grid">
+            <!-- 项目会动态添加 -->
+        </div>
+        <p style="text-align: center; color: var(--text-dim); margin-top: 40px;">
+            持续更新中...
+        </p>
+    </section>
+
     <section id="status-section">
-        <h2 class="section-title">建设<span>中</span></h2>
+        <h2 class="section-title">统计<span>数据</span></h2>
         <p style="color: var(--text-dim); max-width: 600px; margin: 0 auto;">
-            这个网站正在慢慢完善，项目作品集也在建设中。<br>
-            每一次代码提交都是一次进步，敬请期待。
+            技术栈在增长，作品集在丰富<br>
+            每一次代码提交都是一次进步
         </p>
         <div class="status-grid">
             <div class="status-item">
